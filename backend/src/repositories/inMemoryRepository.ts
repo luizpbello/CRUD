@@ -1,0 +1,40 @@
+import { Person } from "../entities/Person";
+import { IPersonRepository } from "./IPersonRepositories";
+
+export class InMemoryRepository implements IPersonRepository {
+  private person: Person[] = [];
+
+  async save(person: Person): Promise<void> {
+    this.person.push(person);
+  }
+  async findById(id: string): Promise<Person> {
+    const person = this.person.find((person) => person.id === id);
+    if (!person) throw new Error("Pessoa não encontrada");
+    return person;
+  }
+  async deleterPerson(id: string): Promise<void> {
+    const indexToDelete = this.person.findIndex((person) => person.id === id);
+
+    if (indexToDelete === -1) {
+      throw new Error("Pessoa não encontrada");
+    }
+
+    this.person.splice(indexToDelete, 1);
+  }
+  async update(id: string, person: Person): Promise<Person> {
+    const indexToUpdate = this.person.findIndex((person) => person.id === id);
+
+    if (indexToUpdate === -1) {
+      throw new Error("Pessoa não encontrada");
+    }
+
+    const updatedPerson = { ...this.person[indexToUpdate], ...person };
+
+    this.person[indexToUpdate] = updatedPerson;
+
+    return updatedPerson;
+  }
+  async findAll(): Promise<Person[]> {
+    return this.person
+  }
+}
