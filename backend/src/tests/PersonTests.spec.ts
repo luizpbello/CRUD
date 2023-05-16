@@ -76,7 +76,7 @@ describe("Testing Person repository", () => {
     });
 
     await expect(
-      repository.update("a8923an", { name: "Luiz", lastName: "Bello" })
+      repository.update("a8923an", {name: "Luiz", lastName: "Bello" })
     ).rejects.toThrowError("Pessoa não encontrada");
   });
 });
