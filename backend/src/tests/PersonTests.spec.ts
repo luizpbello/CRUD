@@ -2,6 +2,12 @@ import { it, describe, beforeEach, expect } from "vitest";
 import { InMemoryRepository } from "../repositories/inMemoryRepository";
 import { Person } from "../entities/Person";
 
+const fakePerson = {
+  id: "1l6j9a",
+  name: "Luiz",
+  lastName: "Bello",
+};
+
 describe("Testing Person repository", () => {
   let repository: InMemoryRepository;
 
@@ -10,11 +16,7 @@ describe("Testing Person repository", () => {
   });
 
   it("Should can create a new Person", async () => {
-    const person = new Person({
-      id: "123abc",
-      name: "Luiz",
-      lastName: "Bello",
-    });
+    const person = new Person(fakePerson);
 
     await repository.save(person);
     const result = await repository.findAll();
@@ -22,11 +24,7 @@ describe("Testing Person repository", () => {
   });
 
   it("Should can find a Person by ID", async () => {
-    const person = new Person({
-      id: "5e2c3t",
-      name: "Luiz",
-      lastName: "Bello",
-    });
+    const person = new Person(fakePerson);
 
     await repository.save(person);
     const result = await repository.findById(person.id);
@@ -34,11 +32,7 @@ describe("Testing Person repository", () => {
   });
 
   it("Should can delete a Person by ID", async () => {
-    const person = new Person({
-      id: "5e2c3t",
-      name: "Luiz",
-      lastName: "Bello",
-    });
+    const person = new Person(fakePerson);
 
     await repository.save(person);
     const personToDelete = await repository.findById(person.id);
@@ -53,23 +47,36 @@ describe("Testing Person repository", () => {
     );
   });
 
-  it("Should cand update a person data", async () => {
-    const person = new Person({
-      id: "5e2c3t",
-      name: "Luiz",
-      lastName: "Bello",
-    });
+  it("Should can update a person data", async () => {
+    const person = new Person(fakePerson);
 
     await repository.save(person);
 
-    const personToUpdate = new Person(
-      { name: "Alterado", lastName: "Até demais" },
-      person.id
-    );
+    const personToUpdate = new Person({
+      id: person.id,
+      name: "Alterado",
+      lastName: "Até demais",
+    });
 
     await repository.update(person.id, personToUpdate);
     const personUpdated = await repository.findById(person.id);
     expect(personUpdated?.name).toBe("Alterado");
     expect(personUpdated?.lastName).toBe("Até demais");
+  });
+
+  it("Should can't update a person that doesn't exists", async () => {
+    const person = new Person(fakePerson);
+
+    await repository.save(person);
+
+    const personToUpdate = new Person({
+      id: person.id,
+      name: "Alterado",
+      lastName: "Até demais",
+    });
+
+    await expect(
+      repository.update("a8923an", { name: "Luiz", lastName: "Bello" })
+    ).rejects.toThrowError("Pessoa não encontrada");
   });
 });
