@@ -6,19 +6,15 @@ export class PersonController {
   constructor(private personRepository: IPersonRepository) {}
 
   async createPerson(data: IPersonRequestDTO) {
-    try {
-      const personExists = await this.personRepository.findById(data.id);
+    const personExists = await this.personRepository.findById(data.id);
 
-      if (personExists) {
-        throw new Error("Pessoa já cadastrada.");
-      }
-
-      const person = new Person(data);
-
-      await this.personRepository.save(person);
-    } catch (error) {
-        throw new Error('Error do servidor')
+    if (personExists) {
+      throw new Error("Pessoa já cadastrada.");
     }
+
+    const person = new Person(data);
+
+    await this.personRepository.save(person);
   }
 
   async getAllPersons(): Promise<Person[]> {
