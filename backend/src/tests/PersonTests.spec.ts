@@ -18,7 +18,6 @@ describe("Testing Person repository", () => {
 
     await repository.save(person);
     const result = await repository.findAll();
-    console.log(result);
     expect(result[0]).toEqual(person);
   });
 
@@ -34,7 +33,6 @@ describe("Testing Person repository", () => {
     expect(result.id).toEqual(person.id);
   });
 
-
   it("Should can delete a Person by ID", async () => {
     const person = new Person({
       id: "5e2c3t",
@@ -44,12 +42,34 @@ describe("Testing Person repository", () => {
 
     await repository.save(person);
     const personToDelete = await repository.findById(person.id);
-    await repository.deleterPerson(personToDelete.id)
-    const result = await repository.findAll()
-    expect(result).toEqual([])
+    await repository.deleterPerson(personToDelete.id);
+    const result = await repository.findAll();
+    expect(result).toEqual([]);
   });
 
   it("Should return an error if trying to delete a person that doesn't exist", async () => {
-   await expect(repository.deleterPerson('1a9l3m7')).rejects.toThrowError('Pessoa não encontrada')
+    await expect(repository.deleterPerson("1a9l3m7")).rejects.toThrowError(
+      "Pessoa não encontrada"
+    );
+  });
+
+  it("Should cand update a person data", async () => {
+    const person = new Person({
+      id: "5e2c3t",
+      name: "Luiz",
+      lastName: "Bello",
+    });
+
+    await repository.save(person);
+
+    const personToUpdate = new Person(
+      { name: "Alterado", lastName: "Até demais" },
+      person.id
+    );
+
+    await repository.update(person.id, personToUpdate);
+    const personUpdated = await repository.findById(person.id);
+    expect(personUpdated?.name).toBe("Alterado");
+    expect(personUpdated?.lastName).toBe("Até demais");
   });
 });
