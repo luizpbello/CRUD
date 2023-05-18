@@ -2,7 +2,7 @@ import { Person } from "../entities/Person";
 import { IPersonRepository } from "../repositories/IPersonRepositories";
 import { IPersonRequestDTO } from "../controllers/IPersonDTO";
 
-export class PersonController {
+export class PersonUseCase {
   constructor(private personRepository: IPersonRepository) {}
 
   async createPerson(data: IPersonRequestDTO) {
@@ -22,8 +22,8 @@ export class PersonController {
     return persons;
   }
 
-  async getPersonById(data: IPersonRequestDTO): Promise<Person> {
-    const person = await this.personRepository.findById(data.id);
+  async getPersonById(id: string): Promise<Person> {
+    const person = await this.personRepository.findById(id);
     return person;
   }
 }
