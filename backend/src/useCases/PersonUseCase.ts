@@ -26,4 +26,9 @@ export class PersonUseCase {
     const person = await this.personRepository.findById(id);
     return person;
   }
+
+  async deletePerson(id:string):Promise<void>{
+    const personToDelete = await this.personRepository.findById(id)
+    await this.personRepository.deleterPerson(personToDelete.id)
+  }
 }
