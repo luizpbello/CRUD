@@ -28,6 +28,7 @@ describe("Testing Person repository", () => {
 
     await repository.save(person);
     const result = await repository.findById(person.id);
+    console.log(result)
     expect(result.id).toEqual(person.id);
   });
 

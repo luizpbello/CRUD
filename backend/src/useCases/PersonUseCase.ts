@@ -31,4 +31,10 @@ export class PersonUseCase {
     const personToDelete = await this.personRepository.findById(id)
     await this.personRepository.deleterPerson(personToDelete.id)
   }
+
+
+  async updatePerson(id:string, person:IPersonRequestDTO){
+    const personToUpdate = await this.personRepository.findById(id)
+    await this.personRepository.update(id, person)
+  }
 }

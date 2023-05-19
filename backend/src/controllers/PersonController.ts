@@ -45,4 +45,18 @@ export class PersonController {
       return response.status(500).json({error:'Não foi possível excluir a pessoa'})
     }
   }
+
+
+  async updateOne(request:Request, response:Response){
+    const {id} = request.params
+    const newPerson = request.body
+
+    try {
+      const personToUpdate = await this.personUseCase.updatePerson(id, newPerson)
+      return response.status(203).json({message: `Pessoa de id ${id} atualizada`})
+    } catch (error) {
+      console.log(error)
+      return response.status(500).json({error: 'Falha ao atualizar pessoa.'})
+    }
+  }
 }

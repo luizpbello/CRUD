@@ -19,4 +19,8 @@ router.get("/person/:id", (request, response) => {
 router.delete('/person/:id', (request, response) => {
     return personController.deleteOne(request, response)
 })
+
+router.put('/person/:id', (request, response) => {
+  return personController.updateOne(request, response)
+})
 export { router };
