@@ -6,11 +6,8 @@ export class InMemoryRepository implements IPersonRepository {
   private person: Person[] = [];
 
   async save(person: Person): Promise<void> {
-    const personWithId = {
-      ...person,
-      id: uuidv4()
-    }
-    this.person.push(personWithId);
+  
+    this.person.push(person);
   }
   async findById(id: string): Promise<Person> {
     const person = this.person.find((person) => person.id === id);

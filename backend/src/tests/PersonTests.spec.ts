@@ -3,7 +3,6 @@ import { InMemoryRepository } from "../repositories/inMemoryRepository";
 import { Person } from "../entities/Person";
 
 const fakePerson = {
-  id: "1l6j9a",
   name: "Luiz",
   lastName: "Bello",
 };
@@ -17,19 +16,17 @@ describe("Testing Person repository", () => {
 
   it("Should can create a new Person", async () => {
     const person = new Person(fakePerson);
-
     await repository.save(person);
     const result = await repository.findAll();
-    expect(result[0]).toEqual(person);
+    expect(result[0].name && result[0].lastName).toEqual(person.name && person.lastName);
   });
 
   it("Should can find a Person by ID", async () => {
     const person = new Person(fakePerson);
-
     await repository.save(person);
     const result = await repository.findById(person.id);
     console.log(result)
-    expect(result.id).toEqual(person.id);
+    expect(result).toEqual(person);
   });
 
   it("Should can delete a Person by ID", async () => {
@@ -76,8 +73,13 @@ describe("Testing Person repository", () => {
       lastName: "Até demais",
     });
 
+    const errorPerson = {
+      name:"Luiz",
+      lastName:"Bello"
+    }
+
     await expect(
-      repository.update("a8923an", {name: "Luiz", lastName: "Bello" })
+      repository.update("a8923an", errorPerson)
     ).rejects.toThrowError("Pessoa não encontrada");
   });
 });

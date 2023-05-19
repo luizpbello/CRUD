@@ -1,3 +1,5 @@
+import {v4 as uuiv4} from 'uuid'
+
 export class Person {
     public id: string;
     public name!: string;
@@ -5,7 +7,7 @@ export class Person {
 
     
     constructor(props:Person, id?:string){
-        this.id = ''
+        this.id = uuiv4()
         Object.assign(this, props)
     }
 }
