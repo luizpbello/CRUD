@@ -1,15 +1,19 @@
 import { Person } from "../entities/Person";
 import { IPersonRepository } from "./IPersonRepositories";
+import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryRepository implements IPersonRepository {
   private person: Person[] = [];
 
   async save(person: Person): Promise<void> {
-    this.person.push(person);
+    const personWithId = {
+      ...person,
+      id: uuidv4()
+    }
+    this.person.push(personWithId);
   }
   async findById(id: string): Promise<Person> {
     const person = this.person.find((person) => person.id === id);
-    if (!person) throw new Error("Pessoa não encontrada");
     return person;
   }
   async deleterPerson(id: string): Promise<void> {
