@@ -13,16 +13,16 @@ export class PersonController {
         .status(201)
         .json({ message: "Pessoa adicionada com sucesso!" });
     } catch (error) {
-      return response.status(500).json({ error: "Ocorreu algum erro." });
+      return response.status(500).json({ error: "Ocorreu algum erro no servidor." });
     }
   }
 
   async findAll(request: Request, response: Response) {
     try {
       const persons = await this.personUseCase.getAllPersons();
-      return response.status(200).json(persons);
+      !persons ? response.status(200).json(persons) : response.status(404).json({message: 'Nenhuma pessoa registrada'})
     } catch (error) {
-      return response.status(500).json({ error: "Ocorreu algum erro." });
+      return response.status(500).json({ error: "Ocorreu algum erro no servidor." });
     }
   }
 
@@ -30,9 +30,9 @@ export class PersonController {
     const { id } = request.params;
     try {
       const person = await this.personUseCase.getPersonById(id);
-      return response.json(person);
+      person ? response.status(200).json(person) :  response.status(404).json({message: 'Não há usuário com esse ID'})
     } catch (error) {
-      return response.status(500).json({ error: "Ocorreu algum erro." });
+      return response.status(500).json({ error: "Ocorreu algum erro no servidor." });
     }
   }
 
@@ -55,7 +55,6 @@ export class PersonController {
       const personToUpdate = await this.personUseCase.updatePerson(id, newPerson)
       return response.status(203).json({message: `Pessoa de id ${id} atualizada`})
     } catch (error) {
-      console.log(error)
       return response.status(500).json({error: 'Falha ao atualizar pessoa.'})
     }
   }

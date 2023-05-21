@@ -1,7 +1,7 @@
 import {v4 as uuiv4} from 'uuid'
 
 export class Person {
-    public id: string;
+    public id?: string;
     public name!: string;
     public lastName!: string;
 

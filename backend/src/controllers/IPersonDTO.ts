@@ -1,5 +1,5 @@
 export interface IPersonRequestDTO {
-    id:string;
+    id?:string;
     name:string;
     lastName:string;
 }
