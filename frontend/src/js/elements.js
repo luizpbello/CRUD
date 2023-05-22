@@ -2,8 +2,8 @@ export const elements = {
   form: document.getElementById("form"),
   tableBody: document.getElementById("tableBody"),
   tableRow: document.getElementById("tableRow"),
-  name: document.getElementById("name").value,
-  lastName: document.getElementById("lastName").value,
+  name: document.getElementById("name"),
+  lastName: document.getElementById("lastName"),
 };
 
 

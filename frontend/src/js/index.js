@@ -1,16 +1,11 @@
 import { elements } from "./elements.js";
- import { getData, sendData } from "./functions.js";
+import { FormHandler } from "./functions.js";
+const formHandler = new FormHandler()
 
 elements.form.addEventListener("submit", (ev) => {
   ev.preventDefault();
-  sendData();
+  formHandler.sendData();
 });
 
 
-
-const button = document.getElementById("data");
-
-button.addEventListener("click", (ev) => {
-  ev.preventDefault();
-  getData();
-});
+formHandler.getData()
