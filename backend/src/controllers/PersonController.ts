@@ -20,7 +20,7 @@ export class PersonController {
   async findAll(request: Request, response: Response) {
     try {
       const persons = await this.personUseCase.getAllPersons();
-      !persons ? response.status(200).json(persons) : response.status(404).json({message: 'Nenhuma pessoa registrada'})
+      persons ? response.status(200).json(persons) : response.status(404).json({message: 'Nenhuma pessoa registrada'})
     } catch (error) {
       return response.status(500).json({ error: "Ocorreu algum erro no servidor." });
     }

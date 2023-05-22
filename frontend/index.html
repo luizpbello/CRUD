@@ -4,23 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./src/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <link rel="stylesheet" href="./src/css/index.css" />
     <title>Bello CRUD</title>
   </head>
   <body>
     <main>
-      <form action="POST">
+      <form id="form" action="POST">
         <h1>Meu formulário CRUD</h1>
         <div class="row">
           <label for="name">Nome:</label>
-          <input name="name" type="text" />
+          <input name="name" type="text" id="name"/>
         </div>
         <div class="row">
           <label for="lastName">Sobrenome:</label>
-          <input type="text" name="lastName" id="" />
+          <input type="text" name="lastName" id="lastName" />
         </div>
         <button>Enviar</button>
       </form>
+
+      <button id="data">dados</button>
+
+      <table>
+        <thead>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+      </table>
     </main>
   </body>
 </html>
