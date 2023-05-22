@@ -17,7 +17,7 @@ export class FormHandler {
   }
 
   renderPerson() {
-    console.log(this.tableBody);
+    this.tableBody.innerHTML = "";
     this.personData.forEach((person) => {
       const row = document.createElement("tr");
 
@@ -44,7 +44,6 @@ export class FormHandler {
       personToCreate.lastName = elements.lastName.value;
       const response = await axios.post(url, personToCreate);
       alert(response.data.message);
-      this.renderPerson();
       this.clear();
       this.getData();
     } catch (error) {
