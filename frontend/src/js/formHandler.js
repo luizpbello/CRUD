@@ -1,4 +1,4 @@
-import { elements, url, personToCreate } from "./elements.js";
+import { elements, url, personToCreate, clear } from "./elements.js";
 import { tableView } from "./view/tableView.js";
 
 export class FormHandler {
@@ -25,10 +25,7 @@ export class FormHandler {
     });
   }
 
-  clear() {
-    elements.name.value = "";
-    elements.lastName.value = "";
-  }
+
 
   async sendData() {
     try {
@@ -36,13 +33,12 @@ export class FormHandler {
       personToCreate.lastName = elements.lastName.value;
       const response = await axios.post(url, personToCreate);
       alert(response.data.message);
-      this.clear();
+      clear()
       this.getData();
     } catch (error) {
       console.log(error);
     }
   }
-
 
   
 }

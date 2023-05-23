@@ -4,14 +4,18 @@ export const elements = {
   tableRow: document.getElementById("tableRow"),
   name: document.getElementById("name"),
   lastName: document.getElementById("lastName"),
+  send: document.getElementById("send"),
 };
 
-
 export const personToCreate = {
-    name: elements.name,
-    lastName: elements.lastName,
-  };
+  name: elements.name,
+  lastName: elements.lastName,
+};
 
 export const url = "http://localhost:3000/person";
 
 
+export function clear() {
+  elements.name.value = "";
+  elements.lastName.value = "";
+}

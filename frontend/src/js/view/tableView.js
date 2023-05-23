@@ -1,22 +1,6 @@
-const url = "http://localhost:3000/person";
+import { handleDelete, handleEdit } from "../buttonFunctions.js";
 
-function handleEdit(id) {}
 
-function handleDelete(id) {
-  cuteAlert({
-    type: "question",
-    title: "Confirmação",
-    message: "Deseja mesmo excluir?",
-    confirmText: "Okay",
-    cancelText: "Cancel",
-  }).then((e) => {
-    if (e) {
-      axios.delete(`${url}/${id}`).then((res) => alert(res.data.message));
-    } else {
-      return;
-    }
-  });
-}
 
 export const tableView = ({ id, name, lastName }) => {
   const row = document.createElement("tr");
