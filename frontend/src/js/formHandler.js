@@ -19,10 +19,15 @@ export class FormHandler {
 
   renderPerson() {
     this.tableBody.innerHTML = "";
-    this.personData.forEach((person) => {
-      const row = tableView(person);
-      this.tableBody.appendChild(row);
-    });
+    if(this.personData.length === 0) {
+      elements.tableBody.innerText = "Adicione uma pessoa!"
+    }else {
+
+      this.personData.forEach((person) => {
+        const row = tableView(person);
+        this.tableBody.appendChild(row);
+      });
+    }
   }
 
 

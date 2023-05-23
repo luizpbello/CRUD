@@ -5,6 +5,7 @@ export const elements = {
   name: document.getElementById("name"),
   lastName: document.getElementById("lastName"),
   send: document.getElementById("send"),
+  none:document.getElementById("none")
 };
 
 export const personToCreate = {
