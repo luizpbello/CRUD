@@ -19,7 +19,7 @@ export async function handleEdit(id) {
       cuteAlert({
         type: "question",
         title: "Confirmação",
-        message: "Deseja mesmo excluir?",
+        message: "Deseja mesmo alterar essa pessoa?",
         confirmText: "Confirmar",
         cancelText: "Cancelar",
       }).then(async (e) => {
