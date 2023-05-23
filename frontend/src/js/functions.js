@@ -1,4 +1,5 @@
 import { elements, url, personToCreate } from "./elements.js";
+import { tableView } from "./view/tableView.js";
 
 export class FormHandler {
   constructor() {
@@ -19,16 +20,7 @@ export class FormHandler {
   renderPerson() {
     this.tableBody.innerHTML = "";
     this.personData.forEach((person) => {
-      const row = document.createElement("tr");
-
-      const nameCell = document.createElement("td");
-      nameCell.textContent = person.name;
-      row.appendChild(nameCell);
-
-      const lastNameCell = document.createElement("td");
-      lastNameCell.textContent = person.lastName;
-      row.appendChild(lastNameCell);
-
+      const row = tableView(person);
       this.tableBody.appendChild(row);
     });
   }
@@ -50,4 +42,7 @@ export class FormHandler {
       console.log(error);
     }
   }
+
+
+  
 }
