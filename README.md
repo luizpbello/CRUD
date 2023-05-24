@@ -3,14 +3,14 @@
 ### INICIANDO O SERVIDOR
 `cd backend`
 
-# INSTALAANDO DEPENDENCIAS
+### INSTALAANDO DEPENDENCIAS
 `npm install`
 
-# RODANDO O SERVIDOR
+### RODANDO O SERVIDOR
 
 `npm run start`
 
-# PARA RODAR OS TESTES
+### PARA RODAR OS TESTES
 
 `npm run test`
 
